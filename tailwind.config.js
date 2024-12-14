@@ -18,11 +18,34 @@ module.exports = {
     themes: [
       {
         innoviaTheme: {
+          ...require("daisyui/src/theming/themes")["black"],
           "primary": "#fff",
-          "secondary": "#f6d860",
+          "secondary": "#ef4444",
           "accent": "#37cdbe",
           "neutral": "#3d4451",
           "base-100": "#ffffff",
+
+          ".btn-primary": {
+            "color" : "#fff"
+          },
+
+          ".btn-secondary": {
+            "color" : "black",
+            "background-color" : "#ef4444"
+          },
+
+          ".btn-secondary:hover": {
+            "color" : "#fff",
+            "background-color" : "transparent",
+            "border-color" : "#ef4444"
+          },
+
+          ".btn-outline.btn-primary:hover": {
+            "color" : "#ef4444",
+            "background-color" : "transparent",
+            "border-color" : "#ef4444"
+          },
+
         },
       },
       "dark",

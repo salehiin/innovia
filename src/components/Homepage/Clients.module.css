@@ -1,0 +1,30 @@
+/* Clients.module.css */
+.sliderWrapper {
+    width: 100%; /* Full width of the container */
+    height: 300px;
+    overflow: hidden; 
+    /* position: relative; */
+  }
+  
+  .slider {
+    display: flex; /* Make slides inline */
+    animation: scroll 20s linear infinite; /* Smooth scrolling effect */
+    /* position: absolute; */
+    white-space: nowrap;
+    align-items: center;
+  }
+  
+  .slide {
+    flex: 0 0 auto; /* Ensure all slides fit within the container */
+    margin-right: 10px; /* Optional spacing between slides */
+  }
+  
+  @keyframes scroll {
+    from {
+      transform: translateX(0); /* Start from the initial position */
+    }
+    to {
+      transform: translateX(-100%); /* Move the entire slider left */
+    }
+  }
+  

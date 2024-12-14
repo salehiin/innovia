@@ -30,7 +30,7 @@ const Navbar = () => {
 
     return (
         <div>
-            <div className="navbar container mx-auto">
+            <div className="navbar container mx-auto bg-[#000]">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -67,7 +67,7 @@ const Navbar = () => {
                     <ul className="menu menu-horizontal px-1 flex items-center space-x-6">
                         {
                             navItems.map((item) => (
-                                <Link className='font-semibold hover:text-red-500' href={item.path} key={item.path}>{item.title}</Link>
+                                <Link className='font-semibold hover:text-secondary' href={item.path} key={item.path}>{item.title}</Link>
                             ))
                         }
                     </ul>
@@ -76,7 +76,7 @@ const Navbar = () => {
                     <div className='flex space-x-3 items-center'>
                         <BsHandbag className='text-xl' />
                         <BsSearch className='text-xl' />
-                        <a className="btn btn-outline text-white hover:text-red-500 hover:border-red-500">Appointment</a>
+                        <a className="btn btn-outline btn-primary rounded-md">Appointment</a>
                     </div>
                 </div>
             </div>
