@@ -3,6 +3,7 @@
     width: 100%; /* Full width of the container */
     height: 300px;
     overflow: hidden; 
+    background-color: black;
     /* position: relative; */
   }
   

@@ -6,10 +6,16 @@ import styles from "./Clients.module.css"; // Import custom CSS
 const Clients = () => {
   const images = [
     // "/assets/client/1.jpg",
+    "/assets/client/1.png",
     "/assets/client/2.png",
     "/assets/client/3.png",
     "/assets/client/4.png",
     "/assets/client/5.png",
+    "/assets/client/6.png",
+    // "/assets/client/7.png",
+    // "/assets/client/8.png",
+    // "/assets/client/9.png",
+    // "/assets/client/10.png",
   ];
 
   return (
