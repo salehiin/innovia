@@ -1,3 +1,5 @@
+"use client"
+import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -5,28 +7,9 @@ import { BsHandbag, BsSearch } from "react-icons/bs";
 
 const Navbar = () => {
 
-    const navItems = [
-        {
-            title: "Home",
-            path: "/"
-        },
-        {
-            title: "About",
-            path: "/about"
-        },
-        {
-            title: "Services",
-            path: "/services"
-        },
-        {
-            title: "Blog",
-            path: "/blog"
-        },
-        {
-            title: "Contacts",
-            path: "/contacts"
-        },
-    ]
+    const session = useSession();
+    console.log(session)
+
 
     return (
         <div>
@@ -76,12 +59,55 @@ const Navbar = () => {
                     <div className='flex space-x-3 items-center'>
                         <BsHandbag className='text-xl' />
                         <BsSearch className='text-xl' />
-                        <a className="btn btn-outline btn-primary rounded-md">Appointment</a>
+
+
+                        {session?.status === 'loading' &&
+                            <h6>Loading...</h6>
+                        }
+
+                        {
+                            session?.status === 'unauthenticated' &&
+                            <Link href="/login" className="btn btn-outline btn-primary rounded-md">Login</Link>
+                        }
+                        {
+                            session?.status === 'authenticated' &&
+                            <div className='flex'>
+                                <button onClick={() => signOut()} className="btn btn-outline btn-primary rounded-md">Log Out</button>
+                                <Image className='rounded-full ml-2' width={40} height={20} alt={session?.data?.user?.name} src={session?.data?.user?.image} />
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
         </div>
     );
 };
+
+const navItems = [
+    {
+        title: "Home",
+        path: "/"
+    },
+    {
+        title: "About",
+        path: "/about"
+    },
+    {
+        title: "Services",
+        path: "/services"
+    },
+    {
+        title: "My Bookings",
+        path: "/my-bookings"
+    },
+    {
+        title: "Blog",
+        path: "/blog"
+    },
+    {
+        title: "Contacts",
+        path: "/contacts"
+    },
+]
 
 export default Navbar;

@@ -4,7 +4,7 @@ import React from 'react';
 
 
 const ServiceCard = ({service}) => {
-    const{id, img, title, description, price} = service || {};
+    const{_id, img, title, description, price} = service || {};
     return (
         <div className="card card-compact bg-base-100 w-96 shadow-xl mx-auto rounded-sm">
             <figure className="w-full h-[200px]">
@@ -16,7 +16,7 @@ const ServiceCard = ({service}) => {
                 {/* <p>{description}</p> */}
                 <div className="card-actions justify-between items-center">
                     <h6 className='font-semibold'>Price: ${price}</h6>
-                    <Link href="/" className="btn btn-primary btn-outline rounded-sm">Buy Now</Link>
+                    <Link href={`/services/${_id}`} className="btn btn-primary btn-outline rounded-sm">View Details</Link>
                 </div>
             </div>
         </div>

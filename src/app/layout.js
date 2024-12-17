@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import AuthProvider from "@/services/AuthProvider";
+import { ToastContainer } from 'react-toastify';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -16,7 +17,10 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "Innovia",
+  title: {
+    default: "Innovia",
+    template : "%s | Innovia"
+  },
   description: "Startup and Business Solution",
 };
 
@@ -26,6 +30,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <ToastContainer />
         <AuthProvider>
           <Navbar />
           {children}

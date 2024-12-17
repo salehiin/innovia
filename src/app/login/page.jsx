@@ -2,11 +2,31 @@
 import SocialSignin from '@/components/shared/SocialSignin';
 import Image from 'next/image';
 import Link from 'next/link';
+import { signIn, useSession } from 'next-auth/react';
+import { redirect, useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 
 const Page = () => {
 
-    const handleLogin = async () => {}
+    const router = useRouter()
+    const session = useSession()
+    const searchParams = useSearchParams()
+    const path = searchParams.get('redirect');
+
+    const handleLogin = async (event) => {
+        event.preventDefault();
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        const resp = await signIn('credentials',{
+            email, 
+            password, 
+            redirect: true,
+            callbackUrl: path ? path : '/'
+        })
+        if(resp.status === 200){
+            router.push('/')
+        }
+    }
 
     return (
         <div className='container mx-auto flex flex-col min-h-[calc(100vh-68px*2)'>
@@ -19,9 +39,9 @@ const Page = () => {
                     <h6 className='text-3xl font-semibold text-center mb-12'>Sign In!</h6>
                     <form onSubmit={handleLogin} action="">
                         <label htmlFor="email" >Email</label> <br />
-                        <input type="email" name="email" placeholder="Your email" className="mt-3 input input-bordered w-full border-black" /> <br /> <br />
+                        <input type="email" name="email" placeholder="Your email" className="text-black mt-3 input input-bordered w-full border-black" /> <br /> <br />
                         <label htmlFor="password" >Password</label> <br />
-                        <input type="password" name="password" placeholder="Your password" className="mt-3 input input-bordered w-full border-black" /> <br /> <br /> <br />
+                        <input type="password" name="password" placeholder="Your password" className="text-black mt-3 input input-bordered w-full border-black" /> <br /> <br /> <br />
                         <button type='submit' className='btn btn-primary btn-outline btn-block'>Sign In</button>
                     </form>
                     <div>

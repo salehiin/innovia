@@ -40,7 +40,17 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 # 80.5
 # 80.6
 # 80.8
-
+# 80.9 - 09:00
+# 80.10 - 03:50
+# 80.12 - 05:29
+# 81.1 - 
+# 81.2
+# 81.5
+# 81.7
+# 81.9 - for delete
+# 81.10 - toastify
+# 81.11 - for update
+# 81.12 - 11:40
 
 
 

@@ -4,25 +4,25 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'i.postimg.cc',
+        hostname: '*',
         port: '',
         pathname: '**',
         search: '',
       },
-      {
-        protocol: 'https',
-        hostname: 'example.com',
-        port: '',
-        pathname: '**',
-        search: '',
-      },
-      {
-        protocol: 'https',
-        hostname: 'i.ibb.co',
-        port: '',
-        pathname: '**',
-        search: '',
-      },
+      // {
+      //   protocol: 'https',
+      //   hostname: 'example.com',
+      //   port: '',
+      //   pathname: '**',
+      //   search: '',
+      // },
+      // {
+      //   protocol: 'https',
+      //   hostname: 'i.ibb.co',
+      //   port: '',
+      //   pathname: '**',
+      //   search: '',
+      // },
     ],
   },
 };

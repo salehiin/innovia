@@ -1,8 +1,12 @@
 import React from 'react';
-import {services} from '../../lib/services'
 import ServiceCard from '../cards/ServiceCard';
+import { getServices } from '@/services/getServices';
 
-const Services = () => {
+
+const Services = async () => {
+    const {services} = await getServices()
+    
+    // console.log(data.services);
     return (
         <div className='min-h-screen bg-black'>
             <div className='container text-center mx-auto text-primary'>
@@ -12,9 +16,10 @@ const Services = () => {
             </div>
             <div className='container mx-auto mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6'>
                 {
-                    services.slice(0, 6)
-                    .map((service) => (
-                        <ServiceCard service={service} key={service.id}/>
+                    services?.length > 0 && 
+                    // services.slice(0, 6)
+                    services?.map((service) => (
+                        <ServiceCard service={service} key={service._id}/>
                     ))
                 }
             </div>
