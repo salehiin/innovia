@@ -7,11 +7,16 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const Checkout =  ({ params }) => {
     const {data} = useSession();
-    const [service, setService] = useState({})
-    const loadService = async (req, res) => {
+    const [service, setService] = useState({});
+
+    // Use React.use() to unwrap params
+    // const unwrappedParams = React.use(params);
+    // const serviceId = unwrappedParams.id;
+
+    const loadService = async () => {
         const details = await getServicesDetails(params.id);
         setService(details.service)
-    }
+    };
 
     const { _id, title, description, img, price, facility } = service || {};
 
@@ -26,7 +31,7 @@ const Checkout =  ({ params }) => {
             serviceTitle : title,
             serviceID : _id,
             price : price,
-            // img : img,
+            img : img,
         }
         const resp = await fetch('http://localhost:3000/checkout/api/new-booking', {
             method: 'POST',
@@ -45,8 +50,8 @@ const Checkout =  ({ params }) => {
     }, [params])
 
     return (
-        <div className='container mx-auto'>
-            <div className="relative  h-72">
+        <div className='container'>
+            <div className="relative mx-auto w-[90%]  h-72">
                 <Image
                     className="absolute h-72 w-full left-0 top-0 object-cover"
                     src={img}
@@ -74,7 +79,7 @@ const Checkout =  ({ params }) => {
                             <label className="label">
                                 <span className="label-text">Date</span>
                             </label>
-                            <input defaultValue={new Date().getDate()} type="date" name="date" className="input input-bordered text-black" />
+                            <input defaultValue={new Date().toISOString().split('T')[0]} type="date" name="date" className="input input-bordered text-black" />
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -123,10 +128,16 @@ const Checkout =  ({ params }) => {
                                 className="input input-bordered text-black"
                             />
                         </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Image</span>
+                            </label>
+                            <input defaultValue={img} readOnly type="text" name="img" className="input input-bordered text-black" />
+                        </div>
                     </div>
-                    <div className="form-control mt-6">
+                    <div className="form-control mt-16">
                         <input
-                            className="btn btn-primary btn-block text-black"
+                            className="btn btn-primary btn-outline btn-block bg-black"
                             type="submit"
                             value="Order Confirm"
                         />

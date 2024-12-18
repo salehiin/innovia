@@ -10,7 +10,8 @@ const Page = ({ params }) => {
 
     const loadBooking = async () => {
         const bookingDetail = await fetch(`http://localhost:3000/my-bookings/api/booking/${params.id}`);
-        const data = await bookingDetail.json()
+        const data = await bookingDetail.json();
+        // console.log(bookingDetail)
         setBooking(data.data);
     }
 
@@ -29,7 +30,7 @@ const Page = ({ params }) => {
                     "content-type" : "application/json",
 
                 }
-            }
+            },
         );
         if(resp.status === 200){
             toast.success("Update successfull")
@@ -37,14 +38,14 @@ const Page = ({ params }) => {
     };
     useEffect(() => {
         loadBooking()
-    }, [params])
+    }, [params]);
 
     return (
         <div className='container mx-auto'>
             <div className="relative  h-72">
                 <Image
                     className="absolute h-72 w-full left-0 top-0 object-cover"
-                    src={'img'}
+                    src={booking?.img || '/assets/banner/bookings1.jpg'}
                     alt="service"
                     width={1920}
                     height={1080}
@@ -69,7 +70,10 @@ const Page = ({ params }) => {
                             <label className="label">
                                 <span className="label-text">Date</span>
                             </label>
-                            <input defaultValue={booking.date} type="date" name="date" className="input input-bordered text-black" />
+                            <input 
+                            // defaultValue={new Date().toISOString().split('T')[0]}
+                            defaultValue={booking.date} 
+                            type="date" name="date" className="input input-bordered text-black" />
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -119,6 +123,12 @@ const Page = ({ params }) => {
                                 placeholder="Your Address"
                                 className="input input-bordered text-black"
                             />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Image</span>
+                            </label>
+                            <input defaultValue={booking.img} readOnly type="text" name="img" className="input input-bordered text-black" />
                         </div>
                     </div>
                     <div className="form-control mt-6">

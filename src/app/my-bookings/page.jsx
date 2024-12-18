@@ -33,7 +33,7 @@ const Page = () => {
     }, [session]);
 
     return (
-        <div className='container'>
+        <div className='container h-[calc(100vh-97px*2)] mt-10'>
             <div className="relative  w-[90%] mx-auto  h-72">
                 <Image
                     className="absolute h-72 w-full left-0 top-0 object-cover"

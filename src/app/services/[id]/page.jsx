@@ -13,6 +13,7 @@ export const metadata = {
 
 const Page = async ({params}) => {
     const details = await getServicesDetails(params.id)
+    console.log(details);
     const {_id, title, description, img, price, facility} = details.service;
     return (
         <div className="w-11/12 mx-auto my-10">
@@ -34,8 +35,8 @@ const Page = async ({params}) => {
                 </div>
 
                 <div className="p-10 bg-gray-100">
-                    <h2 className="text-3xl font-bold text-orange-600">{title}</h2>
-                    <p>{description}</p>
+                    <h2 className="text-3xl font-bold text-red-500">{title}</h2>
+                    <p className='text-black'>{description} Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi pariatur nihil amet soluta officiis reprehenderit dolorum sequi enim aliquam, sed voluptatum dicta, architecto ad! Maiores sapiente vel consectetur minus rem quia delectus sequi possimus, asperiores quidem dicta obcaecati magnam quae. Doloremque dolorem impedit tempore dolores mollitia facere, fugit rerum eius.</p>
                 </div>
             </div>
 
@@ -44,23 +45,23 @@ const Page = async ({params}) => {
                     <div className="col-span-2 grid grid-cols-2 gap-6">
                         {facility.map((item, index) => (
                             <div
-                                className="bg-rose-100 p-4 border-t-4 border-t-rose-500 rounded-xl"
+                                className="bg-rose-100 p-4 border-t-4 border-t-red-500 rounded-xl"
                                 key={index}
                             >
-                                <h2 className="text-xl font-bold">{item?.name}</h2>
-                                <p>{item?.details}</p>
+                                <h2 className="text-xl font-bold text-red-500">{item?.name}</h2>
+                                <p className='text-black'>{item?.details} Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita dolore ipsum voluptatibus maxime nam nemo nobis amet magni laboriosam non.</p>
                             </div>
                         ))}
                     </div>
 
                     <div className="p-6 bg-gray-100">
-                        <Image className="w-full object-cover h-40" src={'/assets/images/checkout/checkout.png'} alt="checkout service" width={400} height={400} />
+                        <Image className="w-full object-cover rounded-sm h-40" src={'/assets/images/checkout/checkout.jpg'} alt="checkout service" width={400} height={400} />
                         <div className="flex my-4">
-                            <h2 className="text-xl font-bold ">Price: </h2>
+                            <h2 className="text-xl font-bold text-black">Price: &nbsp;</h2>
                             <p className="text-2xl text-rose-500"> ${price}</p>
                         </div>
                         <Link href={`/checkout/${_id}`}>
-                            <button className="bg-rose-500 px-3 py-2 rounded-lg mt-2 w-full">Check out</button>
+                            <button className="bg-red-500 px-3 py-2 rounded-lg mt-2 w-full">Check out</button>
                         </Link>
                     </div>
                 </div>
