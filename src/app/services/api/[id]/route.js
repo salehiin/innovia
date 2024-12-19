@@ -9,6 +9,6 @@ export const GET = async (request, {params}) => {
         const service = await servicesCollection.findOne({_id : new ObjectId(params.id)});
         return NextResponse.json({service})
     } catch (error) {
-        console.log(error);
+        return NextResponse.json({message : "No Data Found"})
     }
 }

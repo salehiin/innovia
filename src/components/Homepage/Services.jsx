@@ -17,8 +17,8 @@ const Services = async () => {
             <div className='container mx-auto mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6'>
                 {
                     services?.length > 0 && 
-                    // services.slice(0, 6)
-                    services?.map((service) => (
+                    services.slice(0, 6).map((service) => (
+                    // services?.map((service) => (
                         <ServiceCard service={service} key={service._id}/>
                     ))
                 }

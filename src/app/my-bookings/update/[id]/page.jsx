@@ -1,19 +1,32 @@
 "use client"
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 const Page = ({ params }) => {
     const { data } = useSession()
     const [booking, setBooking] = useState([]);
 
-    const loadBooking = async () => {
-        const bookingDetail = await fetch(`http://localhost:3000/my-bookings/api/booking/${params.id}`);
-        const data = await bookingDetail.json();
-        // console.log(bookingDetail)
-        setBooking(data.data);
+    // const loadBooking = async () => {
+    //     const bookingDetail = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/my-bookings/api/booking/${params.id}`);
+    //     const data = await bookingDetail.json();
+    //     // console.log(bookingDetail)
+    //     setBooking(data.data);
+    // }
+
+    // Memoize the loadBooking function using useCallback
+  const loadBooking = useCallback(async () => {
+    try {
+      const bookingDetail = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/my-bookings/api/booking/${params.id}`
+      );
+      const data = await bookingDetail.json();
+      setBooking(data?.data || null);
+    } catch (error) {
+      console.error('Failed to load booking details:', error);
     }
+  }, [params.id]);
 
     const handleUpdateBooking = async (event) => {
         event.preventDefault();
@@ -22,7 +35,7 @@ const Page = ({ params }) => {
             phone : event.target.phone.value,
             address : event.target.address.value,
         }
-        const resp = await fetch(`http://localhost:3000/my-bookings/api/booking/${params.id}`,
+        const resp = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/my-bookings/api/booking/${params.id}`,
             {
                 method: "PATCH",
                 body : JSON.stringify(updatedBooking),
@@ -38,7 +51,7 @@ const Page = ({ params }) => {
     };
     useEffect(() => {
         loadBooking()
-    }, [params]);
+    }, [loadBooking]);
 
     return (
         <div className='container mx-auto'>

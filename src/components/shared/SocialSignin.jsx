@@ -2,7 +2,6 @@
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 // import { useRouter } from 'next/router';
-// import { useRouter } from 'next/router';
 import React from 'react';
 import { FaFacebook, FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 

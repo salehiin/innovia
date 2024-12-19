@@ -2,7 +2,7 @@
 import { getServicesDetails } from '@/services/getServices';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 
 const Checkout =  ({ params }) => {
@@ -13,10 +13,19 @@ const Checkout =  ({ params }) => {
     // const unwrappedParams = React.use(params);
     // const serviceId = unwrappedParams.id;
 
-    const loadService = async () => {
-        const details = await getServicesDetails(params.id);
-        setService(details.service)
-    };
+    // const loadService = async () => {
+    //     const details = await getServicesDetails(params.id);
+    //     setService(details.service)
+    // };
+
+    const loadService = useCallback(async () => {
+        try {
+          const details = await getServicesDetails(params.id);
+          setService(details.service);
+        } catch (error) {
+          console.error('Failed to load service details:', error);
+        }
+      }, [params.id]);
 
     const { _id, title, description, img, price, facility } = service || {};
 
@@ -33,7 +42,7 @@ const Checkout =  ({ params }) => {
             price : price,
             img : img,
         }
-        const resp = await fetch('http://localhost:3000/checkout/api/new-booking', {
+        const resp = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/checkout/api/new-booking`, {
             method: 'POST',
             body: JSON.stringify(newBooking),
             headers: {
@@ -46,8 +55,8 @@ const Checkout =  ({ params }) => {
 
     }
     useEffect(() => {
-        loadService()
-    }, [params])
+        loadService();
+    }, [loadService]);
 
     return (
         <div className='container'>

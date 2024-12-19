@@ -19,9 +19,12 @@ const geistMono = localFont({
 export const metadata = {
   title: {
     default: "Innovia",
-    template : "%s | Innovia"
+    template: "%s | Innovia"
   },
   description: "Startup and Business Solution",
+  icons: {
+    icon: "/l5.png", // Correct path to the favicon
+  },
 };
 
 export default function RootLayout({ children }) {
