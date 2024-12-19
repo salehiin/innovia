@@ -22,7 +22,7 @@ import { NextResponse } from "next/server";
 
 export const middleware = async (request) => {
     const cookieStore = cookies(request);  // Get cookies from the request.
-    const token = cookieStore.get('next-auth.session-token'); // Correctly access the session token.
+    const token = cookieStore.get('__Secure-next-auth.session-token'); // Correctly access the session token.
     const pathname = request.nextUrl.pathname; // Get the requested URL's pathname.
 
     // Allow requests to API routes without checking authentication.
